@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  mongodb:
+    image: mongo
+    container_name: mongolearnn
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  backend:
+    image: backend
+    container_name: backend22
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+    environment:
+      - MONGO-URL:mongodb://mongodb:27017/test
+
+volumes:
+  mongodb_data:
